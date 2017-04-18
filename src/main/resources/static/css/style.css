@@ -1,0 +1,47 @@
+body{
+    background: url("background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+header h1{
+    padding-left: 15px;
+    color: #fff;
+}
+.entry-form{
+    background: rgba(255, 255, 255, 0.65);
+    padding: 10px;
+}
+.main-entry{
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.65);
+    padding: 10px;
+}
+.comment{
+    margin: 0 auto;
+    float: none;
+    display: none;
+}
+
+.comment_link{
+    padding: 2px;
+}
+.entry-comment h3 {
+    font-size: 15px;
+}
+.entry-comment p {
+    margin: 0;
+    list-style: disc inside none;
+    display: list-item;
+    padding: 1px;
+}
+
+
+
+.entry-comment {
+    padding: 2px;
+    padding-left: 15px;
+    background: rgba(255, 255, 255, 0.45);
+    border-bottom: 1px solid #bbb6b6;
+}

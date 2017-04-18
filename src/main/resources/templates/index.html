@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Guestbook</title>
+</head>
+<body>
+<header class="col-md-12"><h1>GuestBook</h1></header>
+<div class="entry-wrapper col-md-6">
+<div th:each="message : ${guestbook}" class="col-md-12 guestbook-entry">
+    <div class="main-entry">
+        <h3 th:text="${message.name}">Toomas</h3>
+        <p th:text="${message.entry}">Küll oli tore pidu</p>
+        <div class="comment_link"><a th:onclick="'showCommentForm(\'' + ${message.id} + '\');'">Add comment</a></div>
+        <div class="comment"  th:id="${message.id}" >
+            <form action="#" th:action="@{/addComment}" th:object="${comment}" method="post">
+                    <input  name="entryId" th:value="${message.id}" type="hidden" class="form-control" id="entryId"/>
+                <div class="entry">
+                    <textarea required="required" name="comment" class="form-control" rows="1" cols="25" placeholder="Entry"></textarea>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+        <div  th:each="comment : ${message.comments}" th:if="${comment != null}" class="entry-comments">
+            <div class="entry-comment">
+                <q style="font-style: italic; font-size: 12px" th:text="${message.entry}"></q>
+                <p th:text="${comment}">Küll oli tore pidu</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="entry-form col-md-6">
+    <form action="#" th:action="@{/addEntry}" th:object="${guestbookEntry}" method="post">
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email"/>
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input required="required" name="name" type="text" class="form-control" id="name"/>
+        </div>
+        <div class="entry">
+            <textarea required="required" name="entry" class="form-control" rows="4" cols="50" placeholder="Entry"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script th:fragment="bootstrap" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+    function showCommentForm(id){
+        $("#"+id).toggle();
+    }
+
+</script>
+</body>
+</html>
